@@ -2,6 +2,44 @@
   "schema": 2,
   "addons": [
     {
+      "id": "marketplace",
+      "name": "Каталог аддонов",
+      "version": "0.3.4",
+      "description": "Установка и обновление аддонов из каталога YMDMod на GitHub, уведомления о новых версиях аддонов и мода. Вкладка «Каталог» на этой странице.",
+      "author": "YMDMod",
+      "repo": "YMDMod/marketplace",
+      "tag": "v0.3.4",
+      "commit": "565dd39e707bdf90d1b6ee144ae1e191c2ccf762",
+      "apiVersion": 1,
+      "modVersions": [
+        ">=0.1.0 <1.0.0"
+      ],
+      "type": "addon",
+      "dependencies": {},
+      "files": [
+        {
+          "path": "LICENSE",
+          "size": 1061,
+          "sha256": "f1a20086cd531887144f8631283488b454ab6bca1f4bfdbf6003d4e18ce53746"
+        },
+        {
+          "path": "main.js",
+          "size": 7383,
+          "sha256": "eecfa45c4feeae3ed15c13069c3cafc3a1f969991788bb7a1d4733079ca0f1e9"
+        },
+        {
+          "path": "manifest.json",
+          "size": 712,
+          "sha256": "d748d7c03b110fe57b720496a2cd5bed54c14be225a5610e626181061006500c"
+        },
+        {
+          "path": "renderer.js",
+          "size": 13260,
+          "sha256": "2b50be68af9ab6860fcf8cda2ac60a2b8a63f00623c69a6cf6e22695de338797"
+        }
+      ]
+    },
+    {
       "id": "notifications",
       "name": "Уведомления",
       "version": "0.3.4",
