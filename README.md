@@ -3,8 +3,8 @@
 <p align="center">Отсюда вкладка «Каталог» в <a href="https://github.com/YMDMod/YMDMod">YMDMod</a> берёт аддоны.</p>
 
 <p align="center">
-  <a href="https://github.com/YMDMod/catalog/actions/workflows/update.yml"><img src="https://img.shields.io/github/actions/workflow/status/YMDMod/catalog/update.yml?label=робот" alt="Робот каталога"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/YMDMod/catalog?label=лицензия" alt="Лицензия"></a>
+  <a href="https://github.com/YMDMod/catalog/actions/workflows/update.yml"><img src="https://img.shields.io/github/actions/workflow/status/YMDMod/catalog/update.yml?label=catalog%20bot" alt="Catalog bot"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/YMDMod/catalog?label=license" alt="License"></a>
 </p>
 
 ---
