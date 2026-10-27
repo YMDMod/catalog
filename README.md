@@ -1,17 +1,17 @@
 <h1 align="center">Каталог аддонов YMDMod</h1>
 
-<p align="center">Отсюда вкладка «Каталог» в <a href="https://github.com/ymdmod/ymdmod">YMDMod</a> берёт аддоны.</p>
+<p align="center">Отсюда вкладка «Каталог» в <a href="https://github.com/YMDMod/YMDMod">YMDMod</a> берёт аддоны.</p>
 
 <p align="center">
-  <a href="https://github.com/ymdmod/catalog/actions/workflows/update.yml"><img src="https://img.shields.io/github/actions/workflow/status/ymdmod/catalog/update.yml?label=робот" alt="Робот каталога"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/ymdmod/catalog?label=лицензия" alt="Лицензия"></a>
+  <a href="https://github.com/YMDMod/catalog/actions/workflows/update.yml"><img src="https://img.shields.io/github/actions/workflow/status/YMDMod/catalog/update.yml?label=робот" alt="Робот каталога"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/YMDMod/catalog?label=лицензия" alt="Лицензия"></a>
 </p>
 
 ---
 
 ### Как добавить свой аддон
 
-1. Сделайте репозиторий по [шаблону](https://github.com/ymdmod/addon-template)
+1. Сделайте репозиторий по [шаблону](https://github.com/YMDMod/addon-template)
 2. Добавьте репозиторию топик `ymdmod-addon` (справа в блоке About → шестерёнка → Topics)
 3. Выпустите релиз с тегом `vX.Y.Z`, где `X.Y.Z` — версия из `manifest.json`. В описании коротко напишите,
    что нового
