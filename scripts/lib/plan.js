@@ -136,7 +136,6 @@ function pullBody({ kind, repo, entry, previous, notes, url, marker, catalog }) 
   if (notes.trim()) lines.push('', '### Описание релиза от автора', '', ...notes.trim().split('\n').map((line) => `> ${line}`));
   lines.push(...dependencyLines(entry, catalog));
   lines.push('', '### Файлы', '', ...entry.files.map((f) => `- \`${f.path}\` — ${f.size} байт`));
-  lines.push('', 'Merge — версия попадёт к пользователям. Close — не попадёт: новый аддон больше не будет предлагаться, отклонённая версия тоже.');
   lines.push('', writeMarker(marker));
   return lines.join('\n');
 }
