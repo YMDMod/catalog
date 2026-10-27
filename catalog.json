@@ -1,5 +1,39 @@
 {
   "schema": 2,
-  "addons": [],
+  "addons": [
+    {
+      "id": "notifications",
+      "name": "Уведомления",
+      "version": "0.3.4",
+      "description": "Показывает сообщения мода и аддонов внутри клиента: загрузка, ошибки, прогресс. Другие аддоны пользуются им через ymd.use('notifications').",
+      "author": "YMDMod",
+      "repo": "YMDMod/notifications",
+      "tag": "v0.3.4",
+      "commit": "bcee1bbea666b18b54890eaf573c61418f8d1960",
+      "apiVersion": 1,
+      "modVersions": [
+        ">=0.1.0 <1.0.0"
+      ],
+      "type": "library",
+      "dependencies": {},
+      "files": [
+        {
+          "path": "LICENSE",
+          "size": 1061,
+          "sha256": "f1a20086cd531887144f8631283488b454ab6bca1f4bfdbf6003d4e18ce53746"
+        },
+        {
+          "path": "manifest.json",
+          "size": 1137,
+          "sha256": "856d800bf81853b4333b07d43b1ecb991b172b443ed531bfe1caf504f2aae324"
+        },
+        {
+          "path": "renderer.js",
+          "size": 11312,
+          "sha256": "1c1f2b501c0deea1a06cfd07b57517c6070f73cf32121b27ed1d3f232e1f116c"
+        }
+      ]
+    }
+  ],
   "blocked": []
 }
