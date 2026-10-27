@@ -1,0 +1,9 @@
+{
+  "name": "ymdmod-catalog",
+  "private": true,
+  "description": "Каталог аддонов YMDMod и робот, который его обновляет.",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test \"test/*.test.js\""
+  }
+}
