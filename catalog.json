@@ -2,6 +2,42 @@
   "schema": 2,
   "addons": [
     {
+      "id": "lyrics",
+      "name": "Тексты песен",
+      "version": "0.4.4",
+      "description": "Добавляет синхронный текст из LRCLIB трекам, у которых его нет, в том числе загруженным. Подсветка и оформление — штатные, Яндекса.",
+      "author": "YMDMod",
+      "repo": "YMDMod/lyrics",
+      "tag": "v0.4.4",
+      "commit": "07bad7c372d7f0afd05577e54609a5637e69b1a7",
+      "modVersions": [
+        ">=0.2.0 <1.0.0"
+      ],
+      "dependencies": {},
+      "files": [
+        {
+          "path": "LICENSE",
+          "size": 1061,
+          "sha256": "f1a20086cd531887144f8631283488b454ab6bca1f4bfdbf6003d4e18ce53746"
+        },
+        {
+          "path": "hook.js",
+          "size": 8479,
+          "sha256": "9e99d07d8d883d56bd9d91e52482c9775592825266cdeae3ec8fa6b3b9cf37d5"
+        },
+        {
+          "path": "main.js",
+          "size": 2798,
+          "sha256": "34f980b608d96e75c4080826b3e41ba68167e12d797583d0420807ca3d76b181"
+        },
+        {
+          "path": "manifest.json",
+          "size": 556,
+          "sha256": "5d59bce3e24090f35e3baf2ad080c01ac9c94373cb969be851b6e49e7023d42c"
+        }
+      ]
+    },
+    {
       "id": "marketplace",
       "name": "Каталог аддонов",
       "version": "0.3.5",
