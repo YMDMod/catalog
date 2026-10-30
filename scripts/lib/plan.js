@@ -2,7 +2,7 @@
 const crypto = require('crypto');
 
 const TOPIC = 'ymdmod-addon';
-const SUPPORTED_API_VERSIONS = [1];
+const ENTRY_FILES = ['main.js', 'renderer.js'];
 const ID_PATTERN = /^[a-z0-9][a-z0-9-]{0,63}$/;
 const VERSION_PATTERN = /^\d+\.\d+\.\d+$/;
 const FILE_PATTERN = /^[A-Za-z0-9_-][A-Za-z0-9._-]*(\/[A-Za-z0-9_-][A-Za-z0-9._-]*)*$/;
@@ -41,10 +41,8 @@ function catalogText(catalog) {
   return `${JSON.stringify({ ...catalog, addons }, null, 2)}\n`;
 }
 
-function publishedFiles(tree, manifest) {
-  const paths = tree.map((f) => f.path);
-  if (Array.isArray(manifest.files)) return [...new Set(['manifest.json', ...manifest.files])].filter((p) => paths.includes(p));
-  return paths.filter((p) => !NOT_PUBLISHED.some((pattern) => pattern.test(p)));
+function publishedFiles(tree) {
+  return tree.map((f) => f.path).filter((p) => !NOT_PUBLISHED.some((pattern) => pattern.test(p)));
 }
 
 function validate(manifest, files, version) {
@@ -52,18 +50,13 @@ function validate(manifest, files, version) {
   if (!ID_PATTERN.test(manifest.id || '')) errors.push('id: только a-z, 0-9 и дефис');
   if (typeof manifest.name !== 'string' || !manifest.name) errors.push('нет name');
   if (manifest.version !== version) errors.push(`версия в manifest.json (${manifest.version}) не совпадает с тегом релиза (${version})`);
-  if (!SUPPORTED_API_VERSIONS.includes(manifest.apiVersion)) errors.push(`apiVersion ${manifest.apiVersion} не поддерживается`);
   if (manifest.modVersions !== undefined && !Array.isArray(manifest.modVersions)) errors.push('modVersions должен быть списком');
-  if (manifest.type !== undefined && !['addon', 'library'].includes(manifest.type)) errors.push('type: только addon или library');
   const deps = manifest.dependencies;
   if (deps !== undefined && (!deps || typeof deps !== 'object' || Array.isArray(deps)
     || Object.entries(deps).some(([id, range]) => !ID_PATTERN.test(id) || id === manifest.id || typeof range !== 'string' || !range.trim()))) {
     errors.push('dependencies должен быть объектом { "id": "версии" } без ссылки на себя');
   }
-  for (const key of ['main', 'renderer']) {
-    if (manifest[key] && !files.some((f) => f.path === manifest[key])) errors.push(`${key}: файла ${manifest[key]} нет в релизе`);
-  }
-  if (!manifest.main && !manifest.renderer) errors.push('нет ни main, ни renderer');
+  if (!files.some((f) => ENTRY_FILES.includes(f.path))) errors.push(`в корне нет ни ${ENTRY_FILES.join(', ни ')}`);
   if (files.length > MAX_FILES) errors.push(`больше ${MAX_FILES} файлов`);
   const bad = files.find((f) => !FILE_PATTERN.test(f.path));
   if (bad) errors.push(`недопустимый путь файла: ${bad.path}`);
@@ -86,7 +79,7 @@ async function inspectRelease(client, repo, release) {
     return { errors: ['manifest.json не читается как JSON'] };
   }
   const sizes = new Map(tree.map((f) => [f.path, f.size]));
-  const paths = publishedFiles(tree, manifest);
+  const paths = publishedFiles(tree);
   const precheck = validate(manifest, paths.map((p) => ({ path: p, size: sizes.get(p) })), version);
   if (precheck.length) return { errors: precheck };
 
@@ -100,13 +93,11 @@ async function inspectRelease(client, repo, release) {
     name: manifest.name,
     version,
     description: manifest.description || '',
-    author: manifest.author || repo.split('/')[0],
+    author: repo.split('/')[0],
     repo,
     tag: release.tag,
     commit,
-    apiVersion: manifest.apiVersion,
     modVersions: manifest.modVersions || [],
-    type: manifest.type || 'addon',
     dependencies: manifest.dependencies || {},
     files,
   };
@@ -124,7 +115,6 @@ function dependencyLines(entry, catalog) {
 
 function pullBody({ kind, repo, entry, previous, notes, url, marker, catalog }) {
   const lines = [];
-  if (entry.type === 'library') lines.push('Тип: библиотека.', '');
   if (kind === 'new') {
     lines.push(`Новый аддон **${entry.name}** (\`${entry.id}\`) ${entry.version} из [${repo}](https://github.com/${repo}).`);
     lines.push('', `Код релиза: https://github.com/${repo}/tree/${entry.commit}`);
