@@ -22,7 +22,7 @@ function setup() {
     const root = path.join(dir, 'raw', ...repo.split('/'), commit);
     const id = repo.split('/')[1];
     const all = {
-      'manifest.json': JSON.stringify({ id, name: id, version, apiVersion: 1, renderer: 'renderer.js', ...manifest }),
+      'manifest.json': JSON.stringify({ id, name: id, version, ...manifest }),
       'renderer.js': `module.exports = { start() {} }; // ${version}`,
       ...files,
     };
@@ -157,8 +157,7 @@ test('не предлагаются: форки, черновики, кривы�
     gh.release('x/draft', '1.0.0', { draft: true });
     gh.release('x/nomanifest', '1.0.0', { files: { 'manifest.json': null } });
     gh.release('x/badversion', '1.0.0', { manifest: { version: '0.9.0' } });
-    gh.release('x/badapi', '1.0.0', { manifest: { apiVersion: 7 } });
-    gh.release('x/missing', '1.0.0', { manifest: { main: 'main.js' } });
+    gh.release('x/noentry', '1.0.0', { files: { 'renderer.js': null } });
     gh.release('x/blockedrepo', '1.0.0');
     gh.release('a/lyrics', '1.0.0');
     gh.release('b/lyrics', '1.0.0');
@@ -170,18 +169,17 @@ test('не предлагаются: форки, черновики, кривы�
     const text = log.join('\n');
     assert.match(text, /x\/nomanifest.*нет manifest\.json/);
     assert.match(text, /x\/badversion.*не совпадает с тегом/);
-    assert.match(text, /x\/badapi.*apiVersion 7/);
-    assert.match(text, /x\/missing.*main: файла main\.js нет/);
+    assert.match(text, /x\/noentry.*нет ни main\.js, ни renderer\.js/);
     assert.match(text, /b\/lyrics: id "lyrics" уже занят a\/lyrics/);
   } finally {
     gh.cleanup();
   }
 });
 
-test('зависимости и тип переносятся в каталог, кривые зависимости отсеиваются', async () => {
+test('зависимости переносятся в каталог, автор берётся из владельца репозитория, кривые зависимости отсеиваются', async () => {
   const gh = setup();
   try {
-    gh.release('a/lib', '1.0.0', { manifest: { type: 'library' } });
+    gh.release('a/lib', '1.0.0', { manifest: { author: 'Кто-то другой' } });
     gh.release('b/player', '1.0.0', { manifest: { dependencies: { lib: '>=1.0.0', ghost: '*' } } });
     gh.release('c/broken', '1.0.0', { manifest: { dependencies: ['lib'] } });
     const { log } = await gh.run();
@@ -193,7 +191,9 @@ test('зависимости и тип переносятся в каталог,
     assert.match(gh.pulls().find((p) => p.number === player.number).body, /`lib` >=1\.0\.0 — в каталоге 1\.0\.0/);
     gh.merge(player.number);
     const [lib, playerEntry] = gh.catalog().addons;
-    assert.equal(lib.type, 'library');
+    assert.equal(lib.author, 'a');
+    assert.equal(lib.type, undefined);
+    assert.equal(lib.apiVersion, undefined);
     assert.deepEqual(playerEntry.dependencies, { lib: '>=1.0.0', ghost: '*' });
     assert.match(log.join('\n'), /c\/broken.*dependencies должен быть объектом/);
   } finally {
