@@ -4,17 +4,15 @@
     {
       "id": "marketplace",
       "name": "Каталог аддонов",
-      "version": "0.3.4",
-      "description": "Установка и обновление аддонов из каталога YMDMod на GitHub, уведомления о новых версиях аддонов и мода. Вкладка «Каталог» на этой странице.",
+      "version": "0.3.5",
+      "description": "Установка и обновление аддонов из каталога YMDMod на GitHub, уведомления о новых версиях аддонов и мода.",
       "author": "YMDMod",
       "repo": "YMDMod/marketplace",
-      "tag": "v0.3.4",
-      "commit": "565dd39e707bdf90d1b6ee144ae1e191c2ccf762",
-      "apiVersion": 1,
+      "tag": "v0.3.5",
+      "commit": "c442a056c586b6fe87f3dee0d695cc9990699c83",
       "modVersions": [
-        ">=0.1.0 <1.0.0"
+        ">=0.2.0 <1.0.0"
       ],
-      "type": "addon",
       "dependencies": {},
       "files": [
         {
@@ -24,18 +22,18 @@
         },
         {
           "path": "main.js",
-          "size": 7383,
-          "sha256": "eecfa45c4feeae3ed15c13069c3cafc3a1f969991788bb7a1d4733079ca0f1e9"
+          "size": 7346,
+          "sha256": "b17f8a6c96d11db6ebf6199fd165f42ba244697a515ad6245d522f9df0d090c1"
         },
         {
           "path": "manifest.json",
-          "size": 712,
-          "sha256": "d748d7c03b110fe57b720496a2cd5bed54c14be225a5610e626181061006500c"
+          "size": 500,
+          "sha256": "8152b4d0a6949e52b461c80370b2d72496c288f1f972c2d4a62212e782f24031"
         },
         {
           "path": "renderer.js",
-          "size": 13260,
-          "sha256": "2b50be68af9ab6860fcf8cda2ac60a2b8a63f00623c69a6cf6e22695de338797"
+          "size": 13149,
+          "sha256": "1b1f565d00b68a5dbdde96acb559e869e0468b8e8db83c7e07304a7900d0f183"
         }
       ]
     },
