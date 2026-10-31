@@ -103,6 +103,42 @@
           "sha256": "1c1f2b501c0deea1a06cfd07b57517c6070f73cf32121b27ed1d3f232e1f116c"
         }
       ]
+    },
+    {
+      "id": "privacy",
+      "name": "Без слежки",
+      "version": "0.1.0",
+      "description": "Блокирует телеметрию клиента.",
+      "author": "YMDMod",
+      "repo": "YMDMod/privacy",
+      "tag": "v0.1.0",
+      "commit": "2545968a765fbf607615a5946b51bb4d12e4dd9e",
+      "modVersions": [
+        ">=0.2.0 <1.0.0"
+      ],
+      "dependencies": {},
+      "files": [
+        {
+          "path": "LICENSE",
+          "size": 1061,
+          "sha256": "f1a20086cd531887144f8631283488b454ab6bca1f4bfdbf6003d4e18ce53746"
+        },
+        {
+          "path": "main.js",
+          "size": 2864,
+          "sha256": "72216819120b5183720f509764525bb235625e9a198809b4205e3119d88125a2"
+        },
+        {
+          "path": "manifest.json",
+          "size": 190,
+          "sha256": "933c6e6a613a45f4262f993ecbe144c602b535f6e48541c8b08bbf56cf985ada"
+        },
+        {
+          "path": "renderer.js",
+          "size": 1586,
+          "sha256": "38be81eadf1f150441130ee668990e8d281af1d53704e4c055de910385c17631"
+        }
+      ]
     }
   ],
   "blocked": []
